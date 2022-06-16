@@ -1,5 +1,6 @@
 from colorama import Fore # Terminal colour
 
+
 # Triple speech marks below indicate to format the string as is (terminal visual)
 print(Fore.GREEN + r""" 
 ((((((((((((((((((((((((((((((((((((((((((((((((\
@@ -39,20 +40,22 @@ print(Fore.YELLOW,"\n[WORDLE-ASSIST] Good starting words are crane, soare, adieu
 
 
 for num in range(6): # The amount of possible guesses to iterate over for main code body
-	guess = input(Fore.YELLOW+"\n[WORDLE-ASSIST] Input word: ").lower() # Guess word
+	print(Fore.YELLOW,"") # Resetting the default terminal text, as fore cannot be applied to inputs
+	guess = input("\n[WORDLE-ASSIST] Input word: ").lower() # Guess word
 	for i in guess:
 		if not (i in "abcdefghijklmnopqrstuvwxyz") or len(guess) != 5 or guess not in wordlist: # Checking if input word is valid or not
-			print(Fore.RED, ("\n[WORDLE-ASSIST] Please input a 5 valid letter word as a guess with only letters included.\nOr, the word is unable to be the answer based off the letters known."))
+			print(Fore.RED,"\n[WORDLE-ASSIST] Please input a 5 valid letter word as a guess with only letters included.\nOr, the word is unable to be the answer based off the letters known.")
 			exit()
 		else:
 			pass
 
 
-	print("[WORDLE-ASSIST] g - green, y - yellow, w - wrong / grey") # Feedback prompts
+	print(Fore.YELLOW,"\n[WORDLE-ASSIST] g - green, y - yellow, w - wrong / grey") # Feedback prompts
+	print(Fore.YELLOW,"") # Resetting the default terminal text, as fore cannot be applied to inputs
 	feedback = input("[WORDLE-ASSIST] Feedback: ") # Feedback input
 	for i in feedback:
 		if not (i in "gyw") or len(feedback) != 5: # Checking if feedback input is valid or not
-			print(Fore.RED, ("\n[WORDLE-ASSIST] Please ensure you are inputting 5 letters and following the feedback rule (g - green, y - yellow, w - wrong / grey)"))
+			print(Fore.RED,"\n[WORDLE-ASSIST] Please ensure you are inputting 5 letters and following the feedback rule (g - green, y - yellow, w - wrong / grey)")
 			exit()
 		else:
 			pass
@@ -81,12 +84,15 @@ for num in range(6): # The amount of possible guesses to iterate over for main c
 				wordlist.remove(word)
 				break
 
-	#  Format code for suggestion words
+	#  Format output in terminal for suggestion words
 	counter = 0
-	print(Fore.LIGHTGREEN_EX+"[WORDLE-ASSIST] Possible Words: ")
+	print(Fore.LIGHTGREEN_EX,"[WORDLE-ASSIST] Possible Words: ")
 	for word in wordlist:
 		print(word,end=", ")
 		counter+=1
 		if counter == 8: # (Keeps max 8 words on one line in terminal)
 			print("")
 			counter = 0
+
+# Eliminate previous wordle words that have been used in history
+# Sort the words from most common to least in the terminal output of suggestion words
